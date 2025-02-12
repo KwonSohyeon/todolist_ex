@@ -1,23 +1,23 @@
 const input = document.getElementById("input-text");
-const btn = document.getElementById("add");
+const addBtn = document.getElementById("add");
 
-btn.addEventListener("click", () => {
+addBtn.addEventListener("click", () => {
   let ul = document.querySelector("ul");
   let list = document.createElement("li");
-  let check = document.createElement("input");
-  check.setAttribute("type", "checkbox");
 
-  list.textContent = input.value;
-  list.appendChild(check);
+  let checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+
+  let delBtn = document.createElement("button");
+  delBtn.textContent = "삭제";
+
+  delBtn.addEventListener("click", () => {
+    ul.removeChild(list);
+  });
+
+  list.appendChild(checkbox);
+  list.appendChild(document.createTextNode(input.value));
+  list.appendChild(delBtn);
+
   ul.appendChild(list);
 });
-
-// Todo 객체 생성
-// Dummy Data(가짜데이터)
-const todos = [
-  { title: "자바스크립트 공부", content: "배열메서드", date: "오늘까지" },
-  { title: "자바스크립트 공부", content: "DOM", date: "내일까지" },
-];
-
-// 화면에 투두리스트 전체를 보여주는 함수
-function loadTodos() {}
