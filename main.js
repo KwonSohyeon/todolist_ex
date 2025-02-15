@@ -2,10 +2,7 @@ const input = document.getElementById("input-text"); // input태그 가져오기
 const addBtn = document.getElementById("add"); // add버튼 태그 가져오기
 
 // list 객체 만들기 (가짜데이터)
-const todolist = [
-  { content: "운동하기", id: 1 },
-  { content: "노래듣기", id: 2 },
-];
+const todolist = [];
 
 readTodo(); // 가짜데이터을 화면에 불러오기
 
@@ -44,9 +41,6 @@ function readTodo() {
 
 //  추가버튼 클릭시 이벤트
 addBtn.addEventListener("click", () => {
-  window.addEventListener("keydown", (e) => {
-    const key = document.getElementById(e.key);
-  });
   // input 필드에 값이 없을 경우
   if (input.value.trim() === "") {
     alert("할일을 입력해주세요"); // alert로 경고창 발생
@@ -78,11 +72,16 @@ addBtn.addEventListener("click", () => {
   list.appendChild(delBtn); // 삭제버튼을 list 자식으로 추가
   ul.appendChild(list); // list를 ul 자식으로 추가
 
-  todolist.push({ content: input.value, id: todolist.length + 1 }); //  새로 생성된  객체값을 todolist에 추가
+  const todo = {
+    checkbox : false,
+    content : input.value,  
+  }
+  todolist.push(todo); //  새로 생성된  객체값을 todolist에 추가
   console.log(todolist);
 
   input.value = ""; // input에 값은 초기화
 
   localStorage.setItem("todolist", JSON.stringify(todolist));
-  const newList = JSON.parse(localStorage.getItem("todolist"));
+  todolist = JSON.parse(localStorage.getItem("todolist"));
 });
+
